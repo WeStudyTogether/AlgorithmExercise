@@ -3,7 +3,7 @@ package com.fhlxc.week01;
 /**
 * @author Xingchao Long
 * @date 2020/39/10 17:39:28
-* @ClassName AddTwoNumbers.java
+* @ClassName AddTwoNumbers
 * @Description 
 * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 
