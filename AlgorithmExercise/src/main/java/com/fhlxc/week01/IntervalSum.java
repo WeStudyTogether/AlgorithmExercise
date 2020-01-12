@@ -31,8 +31,14 @@ public class IntervalSum {
     
     public static int intervalSum(int[] nums, int k) {
         int max = 0;
-        for (int i = 0; i < nums.length - k; i += k) {
-            int sum = primes(nums[i]) + primes(nums[i + 1]) + primes(nums[i + 2]);
+        int length = nums.length;
+        for (int i = 0; i < length - k; i += k) {
+            int sum = 0;
+            for (int j = 0; j < k; j++) {
+                if (i + j < length) {
+                    sum += primes(nums[i + j]);
+                }
+            }
             if (max < sum) {
                 max = sum;
             }
