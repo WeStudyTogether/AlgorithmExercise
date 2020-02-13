@@ -21,7 +21,7 @@ import java.util.Queue;
 
 public class NextPermutation {
     
-    private boolean swap(int[] nums, int i, int j) {
+    private void swap(int[] nums, int i, int j) {
         boolean result = false;
     }
     
