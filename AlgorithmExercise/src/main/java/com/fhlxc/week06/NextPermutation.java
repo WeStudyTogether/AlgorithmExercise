@@ -3,8 +3,6 @@ package com.fhlxc.week06;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author Xingchao Long
@@ -21,21 +19,78 @@ import java.util.Queue;
 
 public class NextPermutation {
     
-    private void swap(int[] nums, int i, int j) {
-        boolean result = false;
+    private int[] find(int[] nums, int i, int j, int[] result) {
+        int m = i;
+        int n = j;
+        
+        for (m = i; m >= j; m--) {
+            for (n = j; n < m; n++) {
+                if (m == i && n == j) {
+                    continue;
+                }
+                if (nums[m] > nums[n]) {
+                    if (n == j) {
+                        if (nums[m] >= nums[i]) {
+                            continue;
+                        }
+                    }
+                    result[0] = m;
+                    result[1] = n;
+                    result[2] = 1;
+                    return result;
+                }
+            }
+        }
+        result[2] = 0;
+        return result;
     }
     
     public void nextPermutation(int[] nums) {
-        Queue<Integer> queue = new LinkedList<Integer>();
+        int i = nums.length - 1;
+        int j = 0;
+        int[] r = {0, 0, 0};
         
-        for (int i = nums.length - 1; i >= 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
+        out: for (; i >= 0; i--) {
+            for (j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
-                    return;
+                    r[0] = i;
+                    r[1] = j;
+                    r[2] = 1;
+                    break out;
                 }
             }
-            queue.add(nums[i]);
         }
+        
+        int t = 0;
+        
+        if (r[2] == 0) {
+            for (i = r[1]; i < nums.length; i++) {
+                for (j = i + 1; j < nums.length; j++) {
+                    if (nums[i] > nums[j]) {
+                        t = nums[i];
+                        nums[i] = nums[j];
+                        nums[j] = t;
+                    }
+                }
+            } 
+            return;
+        }
+        
+        while (r[2] == 1) {
+            r = find(nums, r[0], r[1], r);
+        }
+        t = nums[r[0]];
+        nums[r[0]] = nums[r[1]];
+        nums[r[1]] = t;
+        for (i = r[1] + 1; i < nums.length; i++) {
+            for (j = i + 1; j < nums.length; j++) {
+                if (nums[i] > nums[j]) {
+                    t = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = t;
+                }
+            }
+        } 
     }
 
     public static void main(String[] args) throws IOException {
