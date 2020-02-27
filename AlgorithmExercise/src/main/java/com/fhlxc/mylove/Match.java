@@ -3,6 +3,9 @@ package com.fhlxc.mylove;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
 * @author Xingchao Long
@@ -47,8 +50,82 @@ s = "mississippi"
 public class Match {
 
     public static boolean isMatch(String s, String p) {
-        boolean result = true;
-        return result;
+        List<String> pattern = new ArrayList<String>();
+        Stack<Character> tmp = new Stack<>();
+        StringBuilder s1 = new StringBuilder(s);
+        for (int i = p.length() - 1; i >= 0; i--) {
+            if (p.charAt(i) != '*') {
+                pattern.add(0, p.charAt(i) + "");
+            } else {
+                i--;
+                pattern.add(0, p.charAt(i) + "*");
+            }
+        }
+        int j = 0;
+        int i = 0;
+        try {
+            for (; i < s1.length(); i++, j++) {
+                if (pattern.get(j).length() > 1) {
+                    if (s1.charAt(i) != pattern.get(j).charAt(0) && pattern.get(j).charAt(0) != '.') {
+                        i--;
+                    } else {
+                        if (i != s1.length() - 1) {
+                            j--;
+                        }
+                        tmp.add(s1.charAt(i));
+                    }
+                } else {
+                    if (s1.charAt(i) != pattern.get(j).charAt(0) && pattern.get(j).charAt(0) != '.') {
+                        if (pattern.get(j - 1).charAt(0) == s1.charAt(i)) {
+                            if (!tmp.empty()) {
+                                if (tmp.peek() != pattern.get(j).charAt(0)) {
+                                    return false;
+                                } else {
+                                    tmp.pop();
+                                    j--;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                        return false;
+                    }
+                    s1.replace(i, i + 1, "*");
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+        String str = "";
+        int n = 0;
+        
+        while (j < pattern.size()) {
+            if (pattern.get(j).length() <= 1) {
+                str += pattern.get(j);
+                n++;
+            }
+            j++;
+        }
+        int begin = s.length() - n;
+        if (begin < 0) {
+            begin = 0;
+        }
+        String ss = s1.substring(begin);
+        
+        try {
+            for (int k = 0; k < n; k++) {
+                if (ss.charAt(k) == '*') {
+                    return false;
+                }
+                if (ss.charAt(k) != str.charAt(k) && str.charAt(k) != '.') {
+                    return false;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+        
+        return true;
     }
     
     public static void main(String[] args) {
