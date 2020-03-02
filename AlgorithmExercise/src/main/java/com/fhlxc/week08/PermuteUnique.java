@@ -11,6 +11,14 @@ import java.util.List;
 * @date 2020年3月1日 上午11:12:05
 * @ClassName PermuteUnique
 * @Description 
+* 给定一个序列，返回其所有可能的但不重复的全排列。
+* 输入: [1,2,1]
+* 输出:
+* [
+*   [1,2,1],
+*   [1,1,2],
+*   [2,1,1]
+* ]
 */
 
 public class PermuteUnique {
