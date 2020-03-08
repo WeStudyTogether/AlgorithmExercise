@@ -34,18 +34,21 @@ public class Jump {
         }
     }
 
+    /**
+     * 思路：每个位置均可达，那么记录每次能跳跃的最远距离，当i走到那个，最远距离，说明要跳到那里。
+     */
     public int jump(int[] nums) {
-        for (int i = 0; i < nums.length;) {
-            int max = nums[i + 1];
-            for (int j = i + 1; j < i + nums[i]; j++) {
-                if (max < nums[j]) {
-                    max = nums[j];
-                }
+        int max = 0;
+        int tmp = 0;
+        int r = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            max = Math.max(i + nums[i], max);
+            if (i == tmp) {
+                tmp = max;
+                r++;
             }
-            i += max;
-            result++;
         }
-        return result;
+        return r;
     }
     
     public static void main(String[] args) throws IOException {
