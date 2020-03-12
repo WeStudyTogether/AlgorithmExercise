@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 * 输出:
 * [
 *  [ 1, 2, 3 ],
-* [ 8, 9, 4 ],
+*  [ 8, 9, 4 ],
 *  [ 7, 6, 5 ]
 * ]
 */
