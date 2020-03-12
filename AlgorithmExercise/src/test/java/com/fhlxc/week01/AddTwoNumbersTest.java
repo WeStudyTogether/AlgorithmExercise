@@ -1,5 +1,9 @@
 package com.fhlxc.week01;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
 * @author Xingchao Long
 * @date 2020/55/10 18:55:47
@@ -9,17 +13,24 @@ package com.fhlxc.week01;
 
 public class AddTwoNumbersTest {
     
-    public static int addThreeNumbers(int n1, int n2, int n3) {
-        if (n3 < 0) {
-            n1 = -n1;
+    public static void test(String s) {
+        try {
+            System.out.println(Integer.parseInt(s));
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
         }
-        return n1 + n2 + n3;
     }
     
     public static void main(String[] args) {
-        System.out.println(addThreeNumbers(1, 3, 1));
-        System.out.println(addThreeNumbers(0, 3, -1));
-        System.out.println(addThreeNumbers(1, 3, -1));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            try {
+                String s = reader.readLine();
+                test(s);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
 }
