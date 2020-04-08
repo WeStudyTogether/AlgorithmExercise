@@ -7,3 +7,5 @@ bin/
 out/
 *.iml
 *.jar
+.*
+!/.gitignore
