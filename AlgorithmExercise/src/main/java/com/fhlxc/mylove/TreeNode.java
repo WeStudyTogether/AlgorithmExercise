@@ -17,4 +17,13 @@ public class TreeNode {
         val = x; 
     }
     
+    public static void inorderTra(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.val + " ");
+        inorderTra(root.left);
+        inorderTra(root.right);
+    }
+    
 }
