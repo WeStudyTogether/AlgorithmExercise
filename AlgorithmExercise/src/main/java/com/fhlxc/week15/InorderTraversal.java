@@ -58,6 +58,14 @@ public class InorderTraversal {
         tmp.right = new TreeNode(3);
         tmp.left = new TreeNode(4);
         System.out.println(new InorderTraversal().inorderTraversal(root));
+        TreeNode.preorderIte(root);
+        TreeNode.preorderTra(root);
+        System.out.println();
+        TreeNode.postorderIte(root);
+        TreeNode.postorderTra(root);
+        System.out.println();
+        TreeNode.inorderIte(root);
+        TreeNode.inorderTra(root);
     }
 
 }
